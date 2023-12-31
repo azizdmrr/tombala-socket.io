@@ -22,10 +22,10 @@
     <th id="th0" class="numberY" onclick = "sayiVarTik(0)">1</th>
     <th class="numberN"></th>
     <th id="th1" class="numberY" onclick = "sayiVarTik(1)">2</th>
-	 <th class="numberN"></th>
+  <th class="numberN"></th>
     <th id="th2" class="numberY" onclick = "sayiVarTik(2)">3</th>
     <th class="numberN"></th>
-	 <th id="th3" class="numberY" onclick = "sayiVarTik(3)">4</th>
+  <th id="th3" class="numberY" onclick = "sayiVarTik(3)">4</th>
     <th class="numberN"></th>
     <th id="th4" class="numberY" onclick = "sayiVarTik(4)">5</th>
   </tr>
@@ -41,13 +41,13 @@
     <th class="numberN"></th>
   </tr>
   <tr>
-     <th id="th10" class="numberY" onclick = "sayiVarTik(10)">1</th>
+    <th id="th10" class="numberY" onclick = "sayiVarTik(10)">1</th>
     <th class="numberN"></th>
     <th id="th11" class="numberY" onclick = "sayiVarTik(11)">2</th>
-	 <th class="numberN"></th>
+    <th class="numberN"></th>
     <th id="th12" class="numberY" onclick = "sayiVarTik(12)">3</th>
     <th class="numberN"></th>
-	 <th id="th13" class="numberY" onclick = "sayiVarTik(13)">4</th>
+    <th id="th13" class="numberY" onclick = "sayiVarTik(13)">4</th>
     <th class="numberN"></th>
     <th id="th14" class="numberY" onclick = "sayiVarTik(14)">5</th>
   </tr>
@@ -81,8 +81,11 @@
 </div>
 </body>
 <style>
+html, body {
+  font-family: Calibri;
+}
 th{
-background :red;
+background :#ff8b8b;
 width:50px;
 height:50px;
 }
@@ -90,7 +93,7 @@ table{
 background:green;
 }
 .numberY {
-background:yellow;
+background:#ffff92;
 cursor: pointer;
 }
 
@@ -126,7 +129,7 @@ background-color:red;
     width: 100%;
     float: left;
     margin: 20px;
-	    margin-top: -265px;
+    margin-top: -265px;
 }
 
 .sonSayiYaz{
@@ -159,8 +162,8 @@ font-size:45px;
     margin: 20px;
   }
   .bildir {
-  width: 100%; height: 100%;
- position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    position: absolute; top: 0; left: 0;
     background-image: url("https://steamuserimages-a.akamaihd.net/ugc/478893369650358645/294C94C6C56CD531C52FA6BE59F8F8EEB2995768/");
     color: white;
     text-align: center;
@@ -177,9 +180,8 @@ font-size:45px;
 
 
 <script>
-
-  var x = document.getElementById("myAudio");
-  var genelDizi = new Array(15);
+var x = document.getElementById("myAudio");
+var genelDizi = new Array(15);
 var satir1 = new Array();
 var satir2 = new Array();
 var satir3 = new Array();
@@ -195,162 +197,162 @@ var myNick = null;
 var name = getRequests().name;
 console.log(name);
 if(name !== "undefined"){
-  socket.emit('new_user',name,function(data){
-    if(data){
-      myNick=name;
-      document.getElementById("nickname").innerText = "kullanıcı adı : "+myNick;
-      var div = document.getElementById('panel');
-      div.style.display= 'block';
-      var div2 = document.getElementById('login');
-      div2.style.display= 'none';
-    }
-  });
+socket.emit('new_user',name,function(data){
+  if(data){
+    myNick=name;
+    document.getElementById("nickname").innerText = "kullanıcı adı : "+myNick;
+    var div = document.getElementById('panel');
+    div.style.display= 'block';
+    var div2 = document.getElementById('login');
+    div2.style.display= 'none';
+  }
+});
 }
 
 kartDegis();
 
 function girisYap(){
-  console.log( $('#kullaniciAdi').val());
-  socket.emit('new_user',  $('#kullaniciAdi').val(),function(data){
-    if(data){
-      myNick=$('#kullaniciAdi').val();
-      document.getElementById("nickname").innerText = "kullanıcı adı : "+myNick;
-      var div = document.getElementById('panel');
-      div.style.display= 'block';
-      var div2 = document.getElementById('login');
-      div2.style.display= 'none';
+console.log( $('#kullaniciAdi').val());
+socket.emit('new_user',  $('#kullaniciAdi').val(),function(data){
+  if(data){
+    myNick=$('#kullaniciAdi').val();
+    document.getElementById("nickname").innerText = "kullanıcı adı : "+myNick;
+    var div = document.getElementById('panel');
+    div.style.display= 'block';
+    var div2 = document.getElementById('login');
+    div2.style.display= 'none';
 
-    }else{
-      $('#hata').html('<p>bu kullanıcı adı kullanılmaktadır...</p>');
-    }
-  });
-  $('kullaniciAdi').val('');
+  }else{
+    $('#hata').html('<p>bu kullanıcı adı kullanılmaktadır...</p>');
+  }
+});
+$('kullaniciAdi').val('');
 }
 
 socket.on('usernames', function(data){
-    admin = data[0];
-    document.getElementById("adminname").innerHTML ="admin  :  "+admin;
-    var kullaniciTablo = "<p>Akktif Kullanıcılar </p> <table> <tr> <td>Sıra</td> <td>Nick</td> </tr> ";
-  for(i=0;i<data.length;i++) {
-   kullaniciTablo = kullaniciTablo + "<tr> <td>"+(i+1)+"</td><td>"+data[i]+"</td></tr>"
-  }
-  kullaniciTablo = kullaniciTablo +"</table>"
-  document.getElementById("kullaniciList").innerHTML = kullaniciTablo;
+  admin = data[0];
+  document.getElementById("adminname").innerHTML ="admin  :  "+admin;
+  var kullaniciTablo = "<p>Akktif Kullanıcılar </p> <table> <tr> <td>Sıra</td> <td>Nick</td> </tr> ";
+for(i=0;i<data.length;i++) {
+ kullaniciTablo = kullaniciTablo + "<tr> <td>"+(i+1)+"</td><td>"+data[i]+"</td></tr>"
+}
+kullaniciTablo = kullaniciTablo +"</table>"
+document.getElementById("kullaniciList").innerHTML = kullaniciTablo;
 });
 
 
 socket.on('tombala', function(data){
-  msg = data;
-  var msg_tur =msg.split("%*%")[0];
-  var msg_deger =msg.split("%*%")[1];
-  if (msg_tur === "sayi_cek") {
-    sayiIsle(parseInt(msg_deger));
-  } else if(msg_tur === "cinko1") {
-    cinko1 = msg_deger;
-    bildirRun("<p> Birinci Çinko : " + msg_deger + "</p>");
-    document.getElementById("inf-div").innerHTML = "<p>1. Çinko : "+ cinko1 +" </p>"
-  } else if(msg_tur === "cinko2") {
-    cinko2 = msg_deger;
-    bildirRun("<p> İkinci Çinko : " + msg_deger + "</p>");
-    document.getElementById("inf-div").innerHTML = "<p>1. Çinko : "+ cinko1 +" </p> <p>2. Çinko : "+ cinko2 +" </p>"
-  } else if(msg_tur === "tombala") {
-    tombala = msg_deger;
-    bildirRun("<p> Tombala : " + msg_deger + "</p>");
-    document.getElementById("inf-div").innerHTML = "<p>1. Çinko : "+ cinko1 +" </p> <p>2. Çinko : "+ cinko2 +" </p> <p>KAZANAN : "+ tombala +"</p> "+
-            "<button onclick='yeniOyun()'>Yeni Oyun Başlat</button>";
-    document.getElementById("button-div").style.display = "none";
-  } else if (msg_tur === "yenioyun") {
-   // window.location.hostname+"/?name ="+myNick;
-    document.location.href = "/?name="+myNick;
-  }
+msg = data;
+var msg_tur =msg.split("%*%")[0];
+var msg_deger =msg.split("%*%")[1];
+if (msg_tur === "sayi_cek") {
+  sayiIsle(parseInt(msg_deger));
+} else if(msg_tur === "cinko1") {
+  cinko1 = msg_deger;
+  bildirRun("<p> Birinci Çinko : " + msg_deger + "</p>");
+  document.getElementById("inf-div").innerHTML = "<p>1. Çinko : "+ cinko1 +" </p>"
+} else if(msg_tur === "cinko2") {
+  cinko2 = msg_deger;
+  bildirRun("<p> İkinci Çinko : " + msg_deger + "</p>");
+  document.getElementById("inf-div").innerHTML = "<p>1. Çinko : "+ cinko1 +" </p> <p>2. Çinko : "+ cinko2 +" </p>"
+} else if(msg_tur === "tombala") {
+  tombala = msg_deger;
+  bildirRun("<p> Tombala : " + msg_deger + "</p>");
+  document.getElementById("inf-div").innerHTML = "<p>1. Çinko : "+ cinko1 +" </p> <p>2. Çinko : "+ cinko2 +" </p> <p>KAZANAN : "+ tombala +"</p> "+
+          "<button onclick='yeniOyun()'>Yeni Oyun Başlat</button>";
+  document.getElementById("button-div").style.display = "none";
+} else if (msg_tur === "yenioyun") {
+ // window.location.hostname+"/?name ="+myNick;
+  document.location.href = "/?name="+myNick;
+}
 
 });
 
 function bildirRun(mesage) {
-  document.getElementById("bildir").innerHTML = mesage;
-  document.getElementById("bildir").style.display = "block";
-  playAudio();
-  setTimeout(function(){ document.getElementById("bildir").style.display ="none"; pauseAudio(); }, 10000);
+document.getElementById("bildir").innerHTML = mesage;
+document.getElementById("bildir").style.display = "block";
+playAudio();
+setTimeout(function(){ document.getElementById("bildir").style.display ="none"; pauseAudio(); }, 10000);
 }
 
 function getRequests() {
-  var s1 = location.search.substring(1, location.search.length).split('&'),
-          r = {}, s2, i;
-  for (i = 0; i < s1.length; i += 1) {
-    s2 = s1[i].split('=');
-    r[decodeURIComponent(s2[0]).toLowerCase()] = decodeURIComponent(s2[1]);
-  }
-  return r;
+var s1 = location.search.substring(1, location.search.length).split('&'),
+        r = {}, s2, i;
+for (i = 0; i < s1.length; i += 1) {
+  s2 = s1[i].split('=');
+  r[decodeURIComponent(s2[0]).toLowerCase()] = decodeURIComponent(s2[1]);
+}
+return r;
 };
 
 function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) ) + min;
+return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 function sayiCek() {
-  if(admin === myNick){
-  	while(true){
-	cikan_sayi = getRndInteger(1,99);
-	if (cikanSayilar.indexOf(cikan_sayi) == -1){
-      socket.emit('tombala', "sayi_cek%*%"+cikan_sayi);
-	break;
-	}
-	if (cikanSayiListSize  == 99){
-	  break;
-    }
-  }} else {
-    uyariYaz("Yanlızca Admin Sayı çekebilir !!!");
+if(admin === myNick){
+    while(true){
+  cikan_sayi = getRndInteger(1,99);
+  if (cikanSayilar.indexOf(cikan_sayi) == -1){
+    socket.emit('tombala', "sayi_cek%*%"+cikan_sayi);
+  break;
   }
+  if (cikanSayiListSize  == 99){
+    break;
+  }
+}} else {
+  uyariYaz("Yanlızca Admin Sayı çekebilir !!!");
+}
 }
 
 function tombalaKontrol () {
-  var size = satir1.length + satir2.length + satir3.length;
-  if (size == 15){
-    socket.emit('tombala', "tombala%*%"+myNick);
-  } else {
-    uyariYaz("Eksik Sayınız Var Tombala Yapamazsınız !!!")
-  }
+var size = satir1.length + satir2.length + satir3.length;
+if (size == 15){
+  socket.emit('tombala', "tombala%*%"+myNick);
+} else {
+  uyariYaz("Eksik Sayınız Var Tombala Yapamazsınız !!!")
+}
 
 }
 
 function sayiIsle(sayi){
-  cikan_sayi = sayi;
-  cikanSayilar[cikanSayiListSize] = cikan_sayi;
-  cikanSayiListSize = cikanSayiListSize + 1;
-  ekranYaz();
+cikan_sayi = sayi;
+cikanSayilar[cikanSayiListSize] = cikan_sayi;
+cikanSayiListSize = cikanSayiListSize + 1;
+ekranYaz();
 }
 function ekranYaz(){
 
-	var cikanTablo = "<p>Çıkan Sayılar:</p> <table> <tr> <td>Sıra</td> <td>Sayı</td> </tr> ";
-	for (var i = cikanSayiListSize-1; i >= 0; i--){
-	 cikanTablo = cikanTablo + "<tr> <td>" + (i+1) + "</td> <td>"+ cikanSayilar[i] +"</td> </tr>" ;
-	}
-	cikanTablo = cikanTablo + " </table> ";
-	document.getElementById("cikanList").innerHTML = cikanTablo;
+  var cikanTablo = "<p>Çıkan Sayılar:</p> <table> <tr> <td>Sıra</td> <td>Sayı</td> </tr> ";
+  for (var i = cikanSayiListSize-1; i >= 0; i--){
+   cikanTablo = cikanTablo + "<tr> <td>" + (i+1) + "</td> <td>"+ cikanSayilar[i] +"</td> </tr>" ;
+  }
+  cikanTablo = cikanTablo + " </table> ";
+  document.getElementById("cikanList").innerHTML = cikanTablo;
 
-	document.getElementById("sonSayiYaz").innerHTML = cikan_sayi
+  document.getElementById("sonSayiYaz").innerHTML = cikan_sayi
 }
 
 function sayiVarTik(index){
 
-	if(cikanSayilar.indexOf(genelDizi[index]) !== -1 ){
-		if((index/5) < 1){
-		if(satir1.indexOf(genelDizi[index]) == -1){
-		satir1.push(genelDizi[index]);
-		}
-		}
-		else if((index/5) < 2){
-		if(satir2.indexOf(genelDizi[index]) == -1){
-		satir2.push(genelDizi[index]);
-		}
-		} else {
-		if(satir3.indexOf(genelDizi[index]) == -1){
-		satir3.push(genelDizi[index]);
-		}
-		}
-		document.getElementById("th"+index).style.backgroundColor ="GRAY"
-	} else {
-	 uyariYaz("Seçtiğiniz Sayi Henüz Çekilmedi !!!");
-	}
+  if(cikanSayilar.indexOf(genelDizi[index]) !== -1 ){
+      if((index/5) < 1){
+      if(satir1.indexOf(genelDizi[index]) == -1){
+      satir1.push(genelDizi[index]);
+      }
+      }
+      else if((index/5) < 2){
+      if(satir2.indexOf(genelDizi[index]) == -1){
+      satir2.push(genelDizi[index]);
+      }
+      } else {
+      if(satir3.indexOf(genelDizi[index]) == -1){
+      satir3.push(genelDizi[index]);
+      }
+      }
+      document.getElementById("th"+index).style.backgroundColor ="GRAY"
+  } else {
+   uyariYaz("Seçtiğiniz Sayi Henüz Çekilmedi !!!");
+  }
 
 }
 
@@ -363,158 +365,158 @@ setTimeout(function(){ document.getElementById("durumSonuc").innerHTML ="" }, 10
 
 function cinko1At() {
 
-  if (!cinko1){
-    if(cinkoSay() > 0) {
-      socket.emit('tombala', "cinko1%*%"+myNick);
-    } else {
-      uyariYaz("Eliniz Çinkoya Uygun Değil !!!");
-    }
+if (!cinko1){
+  if(cinkoSay() > 0) {
+    socket.emit('tombala', "cinko1%*%"+myNick);
   } else {
-    uyariYaz("1. çinko yapılmış !!!");
+    uyariYaz("Eliniz Çinkoya Uygun Değil !!!");
   }
+} else {
+  uyariYaz("1. çinko yapılmış !!!");
+}
 
 }
 
 function cinko2At() {
 
-  if (!cinko1) {
-    uyariYaz("1. çinko yapılmamış !!!");
-  } else {
-    if (!cinko2) {
-      if(cinkoSay() > 1) {
-        socket.emit('tombala', "cinko2%*%"+myNick);
-      } else {
-        uyariYaz("Eliniz Çinkoya Uygun Değil !!!");
-      }
+if (!cinko1) {
+  uyariYaz("1. çinko yapılmamış !!!");
+} else {
+  if (!cinko2) {
+    if(cinkoSay() > 1) {
+      socket.emit('tombala', "cinko2%*%"+myNick);
     } else {
-      uyariYaz("'2. çinko yapılmış !!!");
+      uyariYaz("Eliniz Çinkoya Uygun Değil !!!");
     }
+  } else {
+    uyariYaz("'2. çinko yapılmış !!!");
   }
+}
 
 }
 
 function kartDegis() {
-  if (cikanSayiListSize == 0){
-  for (var i = 0; i < 15; i++) {
-    while(true){
-      var sayi = getRndInteger(1,99);
-      if (genelDizi.indexOf(sayi) == -1){
-        genelDizi[i] = sayi;
-        break;
-      }
+if (cikanSayiListSize == 0){
+for (var i = 0; i < 15; i++) {
+  while(true){
+    var sayi = getRndInteger(1,99);
+    if (genelDizi.indexOf(sayi) == -1){
+      genelDizi[i] = sayi;
+      break;
     }
   }
+}
 
-  kartIciSirala();
+kartIciSirala();
 
-  for (var i = 0; i < 15; i++) {
-    document.getElementById("th"+i).innerHTML = genelDizi[i];
-  }
-    kartRenkCon();
-  } else {
-    uyariYaz("Oyun Başladı Kart Değiştiremezsiniz !!!")
-  }
+for (var i = 0; i < 15; i++) {
+  document.getElementById("th"+i).innerHTML = genelDizi[i];
+}
+  kartRenkCon();
+} else {
+  uyariYaz("Oyun Başladı Kart Değiştiremezsiniz !!!")
+}
 
 }
 
 function cinkoSay () {
-  var say = 0;
+var say = 0;
 
-  if(satir1.length == 5){
-    say = say + 1;
-  }
-  if(satir2.length == 5){
-    say = say + 1;
-  }
-  if(satir3.length == 5){
-    say = say + 1;
-  }
-  return say;
+if(satir1.length == 5){
+  say = say + 1;
+}
+if(satir2.length == 5){
+  say = say + 1;
+}
+if(satir3.length == 5){
+  say = say + 1;
+}
+return say;
 }
 
 function yeniOyun() {
-  if (myNick === admin){
-    socket.emit('tombala', "yenioyun%*%"+myNick);
-  } else {
-    uyariYaz("Oyunu yanlızca admin yeniden başlatabilir...")
-  }
+if (myNick === admin){
+  socket.emit('tombala', "yenioyun%*%"+myNick);
+} else {
+  uyariYaz("Oyunu yanlızca admin yeniden başlatabilir...")
+}
 
 }
 function kartRenkCon() {
-        //   n , y, kart
-  renks = [["RED","YELLOW","GREEN"],
-           ["BLUE","RED","BLACK"] ,
-          ["BLUE","YELLOW","RED"] ,
-          ["GREEN","RED","BLUE"],
-          ["BLACK","WHITE","RED"],
-          ["BLACK","BLUE","GREEN"]
-  ] ;
+      //   n , y, kart
+renks = [["#ff8b8b","#ffff92","GREEN"],
+         ["#b8b8ff","#ff8b8b","BLACK"] ,
+        ["#b8b8ff","#ffff92","#ff8b8b"] ,
+        ["GREEN","#ff8b8b","#b8b8ff"],
+        ["BLACK","WHITE","#ff8b8b"],
+        ["BLACK","#b8b8ff","GREEN"]
+] ;
 
-  var index = getRndInteger(0, renks.length-1);
+var index = getRndInteger(0, renks.length-1);
 
-  var elements = document.getElementsByClassName('numberN'); // get all elements
-  for(var i = 0; i < elements.length; i++){
-    elements[i].style.backgroundColor = renks[index][0];
-  }
-   elements = document.getElementsByClassName('numberY'); // get all elements
-  for(var i = 0; i < elements.length; i++){
-    elements[i].style.backgroundColor = renks[index][1];
-  }
-  elements = document.getElementsByClassName('kart'); // get all elements
-  for(var i = 0; i < elements.length; i++){
-    elements[i].style.backgroundColor = renks[index][2];
-  }
+var elements = document.getElementsByClassName('numberN'); // get all elements
+for(var i = 0; i < elements.length; i++){
+  elements[i].style.backgroundColor = renks[index][0];
+}
+ elements = document.getElementsByClassName('numberY'); // get all elements
+for(var i = 0; i < elements.length; i++){
+  elements[i].style.backgroundColor = renks[index][1];
+}
+elements = document.getElementsByClassName('kart'); // get all elements
+for(var i = 0; i < elements.length; i++){
+  elements[i].style.backgroundColor = renks[index][2];
+}
 
 }
 
 
 function playAudio() {
-  x.play();
+x.play();
 }
 
 function pauseAudio() {
-  x.pause();
+x.pause();
 }
 
 function kartIciSirala(){
-  var list1 = new Array(5);
-  var list2 = new Array(5);
-  var list3 = new Array(5);
+var list1 = new Array(5);
+var list2 = new Array(5);
+var list3 = new Array(5);
 
-  console.log(list1);
-  console.log(list2);
-  console.log(list3);
+console.log(list1);
+console.log(list2);
+console.log(list3);
 
-  for(var i= 0 ; i<5; i++){
-    list1[i] = genelDizi[i];
-    list2[i] = genelDizi[i+5];
-    list3[i] = genelDizi[i+10];
-  }
-
-
-  console.log(list1);
-  console.log(list2);
-  console.log(list3);
+for(var i= 0 ; i<5; i++){
+  list1[i] = genelDizi[i];
+  list2[i] = genelDizi[i+5];
+  list3[i] = genelDizi[i+10];
+}
 
 
-  list1.sort(function(a, b) {
-    return a - b;
-  });
-  list2.sort(function(a, b) {
-    return a - b;
-  });
-  list3.sort(function(a, b) {
-    return a - b;
-  });
+console.log(list1);
+console.log(list2);
+console.log(list3);
 
 
-  console.log(list1);
-  console.log(list2);
-  console.log(list3);
+list1.sort(function(a, b) {
+  return a - b;
+});
+list2.sort(function(a, b) {
+  return a - b;
+});
+list3.sort(function(a, b) {
+  return a - b;
+});
 
-  genelDizi = list1.concat(list2).concat(list3);
 
-  console.log(genelDizi);
+console.log(list1);
+console.log(list2);
+console.log(list3);
+
+genelDizi = list1.concat(list2).concat(list3);
+
+console.log(genelDizi);
 
 }
 
